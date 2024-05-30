@@ -107,9 +107,25 @@ let car = {
 }
 };
 
+//The way you have done A works as expected, but the labs was intending it to be done a different way.
+//When it says "wrapping the call to car.description() inside a function" it meant like this:
+//setTimeout(() => car.description())
+//so the setTimeout would have a function in it that would call car.description when called
+//instead of modifying the description method of the car
 car.description()
 
 //C 
+//The exercise was intending for the car object to be overriden with the clone like this:
+//car = {...car, year: 2020}
+//The exercise wanted it to be done this way instead of just modifying the year property so then
+//the object was a new object, so it would have a different reference to the previous object
+//When the reference gets changed, the setTimeout call from A will have the updated data,
+//and the bound function will have the old data.
+//This is because when the setTimeout from A calls the function inside it, the data from car will be read,
+//and at the time of execution it will have the updated data. When you're binding the function,
+//it is passed the reference to the old object before the variable gets changed to a new object.
+//This would mean that the bound function would use the old data, even when the car object is pointing
+//to a different object.
 let newCar = {...car, year:2020}
 
 newCar.description()
@@ -117,6 +133,8 @@ newCar.description()
 let boundCar = newCar.description.bind(car);
 setTimeout(boundCar, 200);
 //E
+//Same as C, the exercise was intending for the car object to be set to the cloned object like this:
+//car = {...car, model: '950'}
 let newCar2 = {...car, model: '950'}
 newCar2.description()
 
@@ -175,6 +193,8 @@ function Student(name, age, gender, university) {
     Person.call(this, name, age, gender); //stdudent object
     this.university = university; // adds cohort to Person
 }
+//This part should be calling Student instead of Person like this:
+//let student = new Student('Mark', 35, 'male', 'Auckland')
 let student = new Person('Scott, ', this.university = 'Sydney') // new person based on protype object
 
 Student.prototype = Object.create(Person.prototype);
@@ -289,6 +309,10 @@ async function fetchURLData(url) {
             throw new Error(`Request failed with status ${response.status}`); // if not = to 200
         }
     } catch (error) {
+        //If an error occurs in the try block, since this catch block is throwing the error,
+        //the try catch won't stop the program from crashing. The error that is thrown
+        //from inside this catch block won't be handled anywhere else and will cause
+        //the program to crash.
         throw error;
     }
 }
