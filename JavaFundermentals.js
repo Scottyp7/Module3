@@ -10,7 +10,7 @@ console.log(6 / "3") //2
 
 console.log("2" * "3") //6
 
-console.log(4 + 5 + '\n' "px") //9px
+console.log(4 + 5 + "\npx") //9px
 
 console.log("$" + 4 + 5) //$45 - "" then + at start converts to string for concatinating
 
@@ -45,6 +45,8 @@ let multiplication = three * four
 let division = three / four
 let subtraction = three - four
 let lessThan1 = three > four // symbols are opposite to what you would expect
+//lessThan2 would be true because the 2 numbers are strings. JavaScript would first compare the first characters of each string,
+//and since "3" is less than "4", "30" would be considered less than "4" and the "0" after the "3" in "30" is ignored
 let lessThan2 = thirty < four//symbols are opposite to what you would expect
 
 console.log(addition)
@@ -58,6 +60,7 @@ console.log(lessThan2)
 
 if (0) console.log('#1 zero is true') //will not print
 if ("0") console.log('#2 zero is true')//will print
+//This one here won't print as null is evaluated as false
 if (null) console.log('null is true') // wont print* will print as null is a value
 if (-1) console.log('negative is true') // wont print as no arguments presented
 if (1) console.log('positive is true') //will prin 
@@ -117,6 +120,8 @@ const inigo = {
         let greeting = `Hello ${person.name}, my name is ${this.firstName} ${this.lastName}. `;
         console.log(greeting + this.getCatchPhrase(person));
     },
+    //To update getCatchPhrase to use an arrow function syntax (exercise 6 c), you'd do this:
+    //getCatchPhrase: (person) => {...} (replacing ... with what is already inside the getCatchPhrase method)
     getCatchPhrase(person) { 
     // short hand
     return person.numFingers == 6 ? 'You Killed My Father':'Nice to meet you.';}
@@ -208,7 +213,7 @@ displayValues(sydney)
 displayValues(brisbane)
 
 console.log(displayValues)
-*
+//*
 //SECTION 9
 
 let teamSports = ['Hockey', 'Cricket', 'Volleyball'];
@@ -247,6 +252,12 @@ function Person(name, age) {
     this.age = age;
     this.human = true;
     this.drive = canDrive(this.age)
+    //To add canDrive as a method of this constructor function (exercise 10 e), you can do:
+    /*
+    this.canDrive = function() {
+        return this.age > 18 ? 'Can Drive' : 'Cannot drive'
+    }
+    */
     }
 
 let person1 = new Person('Jeff', 30);
@@ -258,12 +269,20 @@ for (const newLoop in person1) {
 
 console.log(person1)
 console.log(person2)
-
+//It's convention to make classes start with a capital letter. It's not required, but it's done that way
+//to help tell other developers that this is a class
 class personClass {
     constructor(name, age) {
         this.name = name;
         this.age = age;
     }
+
+    //To add a canDrive method to this class (exercise 10 e), you can do:
+    /*
+    canDrive() {
+        return this.age > 18 ? 'Can Drive' : 'Cannot Drive'
+    }
+    */
 }
 
 

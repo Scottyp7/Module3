@@ -63,6 +63,19 @@ const camelCase = (myString) => {
         .toLowerCase() // puts all letters in the string to lowercase
         //.replace("-"," ")// replaces the - with a space - not needed but still works.
         .split('-') // splits each word with the value in the brackets marks
+        //This part would map over all of the words in the array. We want the first word to not start
+        //with a capital letter, and have all other words start with a capital letter.
+        //The map method can pass 3 arguments to your arrow function.
+        //The first one is the item (in this case word) that is the item currently being processed
+        //The second one is the index, the index of the item currently being processed
+        //The third one is the array, the array map was called on
+        //In this case we only need access to the word and the index parameters
+        //If the index is 0, we'd want to return the word, otherwise we'd want to
+        //return the word with the first character being uppercase
+        //You can modify your map function below to do that like this:
+        //.map((word, index) => index == 0 ? word : word.charAt(0).toUpperCase() + word.slice(1))
+        //That would make sure only the first word starts with a non-capitalized letter, and every word
+        //after it will.
         .map(word => word.charAt(0).toUpperCase() + word.slice(1))
         .join(''); // joins them back together without the space
       };
@@ -117,12 +130,18 @@ function currencyOperation(float1, float2, operation) {
             number = float1 + float2;
             break
         case "-":
+            //The + should be changed to a - so it would do subtraction since the operation provided
+            //is a - if this code is running
             number = float1 + float2;
             break
         case "/":
+            //The + should be changed to a / so it would do subtraction since the operation provided
+            //is a / if this code is running
             number = float1 + float2;
             break
         case "*":
+            //The + should be changed to a * so it would do subtraction since the operation provided
+            //is a * if this code is running
             number = float1 + float2;
             break
         default: return NaN
@@ -221,6 +240,9 @@ const lastestBook = () => {
                     latestYear = books.year;
                 }
         })
+        //This would return the latest year, but we'd want the book object with the most recent publication
+        //date. We can do that with the find method like so:
+        //return books.find(book => book.year === latestYear)
         return latestYear;
 } 
 
@@ -237,6 +259,7 @@ phoneBookABC.set('Caroline', '0455221182')
 const phoneBookDEF = new Map(); // just creates a new map of an empty array
 
 const keyValuesDEF = [
+    //An error will be thrown here since there are no commas after the first and second items
     ['David', '021441234']
     ['Edward', '210215701']
     ['Fred', '21247412']
@@ -296,6 +319,13 @@ function topEarner(salaries) {
 /*
 console.log('Current time is ' + today.toLocaleTimeString())
 console.log(today.getHours() + ' hours have passed so far today')
+//today.getMinutes() will only get minutes within the hour, and today.getSeconds() will only get
+//seconds within the minute. To get the minutes passed today you'd multiply the hours by 60
+//to get minutes and get the current hour's minutes like this:
+//today.getHours() * 60 + today.getMinutes()
+//and to get the seconds, you'd multiply hours by 60 * 60 to get seconds, multiply minutes
+//by 60 to get seconds, and add seconds like this:
+today.getHours() * 60 * 60 + today.getMinutes() * 60 + today.getSeconds()
 console.log(today.getMinutes() + ' hours have passed so far today')
 console.log(today.getSeconds() + ' hours have passed so far today')
 */
@@ -321,3 +351,15 @@ console.log(today.getSeconds() + ' hours have passed so far today')
     days = Math.abs(days + 30) % 30
 
 console.log("I am currently " + years +" Years," + months + " Months and " + days + " Days Old.")
+
+//The daysInBetween function is missing from this file. To make the daysInBetween function
+//get the days in between 2 dates, you'd do this:
+/*
+function daysInBetween(date1, date2) {
+    const differenceMS = date2 - date1;
+    const msPerDay = 24 * 60 * 60 * 1000
+    const differenceDays = Math.floor(differenceMS / msPerDay)
+    return Math.abs(differenceDays) //If the number is a negative, make it a positive number
+}
+daysInBetween(new Date('2000-01-01'), new Date()) //Get number of days between now and January 1st 2000
+*/
